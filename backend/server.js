@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql2');
-require('dotenv').config;
+require('dotenv').config();
 
 const app = express();
 
@@ -10,12 +10,19 @@ app.use(cors()); // Izin akses agar React bisa nge-fetch ke sini
 app.use(express.json()); // Agar bisa baca req.body yang dikirim React
 
 // --- Database conect ---
-const db = mysql.createConnection({
+const pool = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0,
 });
+
+const db = pool;
+// debug
+console.log('Database Pool Created');
 
 db.connect((err) => {
     if (err) {
@@ -62,6 +69,29 @@ app.post('/api/contact', (req, res) => {
             success: true,
             message: "Your message saved to database"
         });
+    });
+});
+
+// Rute Projects
+app.get('/api/projects', (req, res) => {
+
+    const query = 'SELECT * FROM projects ORDER BY created_at DESC';
+    
+    db.query(query, (err, results) => {
+        if (err) {
+            // Ini akan muncul di terminal docker logs web_porto_backend
+            console.error('--- DETAIL ERROR DATABASE ---');
+            console.error('Pesan:', err.message);
+            console.error('Kode Error:', err.code);
+            
+            return res.status(500).json({ 
+                error: 'Database error', 
+                details: err.message 
+            });
+        }
+        
+        // Kirim hasil hanya jika tidak ada error
+        res.json(results);
     });
 });
 
