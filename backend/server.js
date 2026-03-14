@@ -1,7 +1,8 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql2');
-require('dotenv').config();
+const axios = require('axios');
 
 const app = express();
 
@@ -56,15 +57,41 @@ app.post('/api/contact', (req, res) => {
         });
     }
 
+    console.log(`1. Mencoba simpan ke database..`);
     const sql = "INSERT INTO contacts (name, email, subject, message) VALUES (?, ?, ?, ?)";
-
-    db.query(sql, [name, email, subject, message], (err, result) => {
+    db.query(sql, [name, email, subject, message], async (err, result) => {
         if (err) {
-            console.error('Save Failed:', err);
+            console.error('Database Error:', err);
             return res.status(500).json({
                 error: "Terjadi kesalahan pada server"
             })
         }
+
+        console.log(`2. tersimpan ke DB, mencoba kirim ke telegram...`)
+        
+        // kirim notif ke telegram
+        const token = process.env.TELEGRAM_TOKEN;
+        const chatId = process.env.TELEGRAM_CHAT_ID;
+        const text = `Ada pesan masuk 📩\n\n` + `Nama: ${name}\n` + `Email: ${email}\n` + `Subject: ${subject}\n` + `Pesan: ${message}\n\n` + `Dikirim via form contact portfolio`;
+
+        try {
+            await axios.post(`https://api.telegram.org/bot${token}/sendMessage`, {
+                chat_id: chatId,
+                text: text,
+                parse_mode: 'Markdown'
+            });
+            if (response.data.ok){
+                console.log("Notification Sent🟢");
+            }
+        } catch (error) {
+            console.error("Failed sent notification🔴", error.message);
+            if (error.response) {
+                console.error("Detail Error:", error.response.data.description);
+            } else {
+                console.error("Pesan Error:", error.message);
+            }
+        }
+
         console.log(`Pesan baru tersimpan (ID: ${result.insertId})`);
         res.status(200).json({
             success: true,
