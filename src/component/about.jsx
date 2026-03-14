@@ -6,7 +6,7 @@ export default function About() {
 	return (
 		<>
 			{/* About Me */}
-			<section id='about' className='py-20 md:py-32 bg-white dark:bg-slate-900/50 border-t border-slate-100 dark:border-slate-800 transition-colors'>
+			<section id='about' className='animation-on-scroll py-20 md:py-32 bg-white dark:bg-slate-900/50 border-t border-slate-100 dark:border-slate-800 transition-colors'>
 				<div className='max-w-6xl mx-auto px-6'>
 					<div className='flex flex-col md:flex-row items-center gap-12'>
 

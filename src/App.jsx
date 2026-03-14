@@ -1,5 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
-import { Toaster } from 'react-hot-toast';
+import { useState, useEffect, useRef, Children } from 'react'
 import './App.css'
 import {
   ArrowUp,
@@ -11,6 +10,22 @@ import About from './component/about';
 import Expertise from './component/expertise';
 import Portfolio from './component/portfolio';
 import Contact from './component/contact';
+
+import { Toaster } from 'react-hot-toast';
+import { motion, AnimatePresence } from 'framer-motion';
+
+const ScrollReveal = ({ children, delay = 0 }) => {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.8, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
+      >
+        {children}
+      </motion.div>
+    );
+  };
 
 function App() {
   const [isDark, setIsDark] = useState(() => {
@@ -48,11 +63,16 @@ function App() {
           }}
         />
         <Navbar isDark={isDark} setIsDark={setIsDark}/>
-        <Hero />
-        <About />
-        <Expertise />
-        <Portfolio />
-        <Contact />
+        <ScrollReveal><Hero /></ScrollReveal>
+        <ScrollReveal><About /></ScrollReveal>
+        <ScrollReveal><Expertise /></ScrollReveal>
+        <ScrollReveal><Portfolio /></ScrollReveal>
+        <ScrollReveal><Contact /></ScrollReveal>
+        
+        
+        
+        
+        
 
         {/* back to top btn */}
         <div className='w-10 h-10 bg-amber-500 dark:bg-indigo-500 rounded-full flex fixed bottom-8 right-8'>
