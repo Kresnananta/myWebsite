@@ -6,6 +6,29 @@ import {
 import axios from 'axios';
 import proj1 from '../assets/proj1.jpg';
 
+const TECH_COLORS = {
+  'React': 'bg-cyan-100 text-cyan-700 dark:bg-cyan-900/50 dark:text-cyan-300',
+  'Tailwind': 'bg-sky-100 text-sky-700 dark:bg-sky-900/50 dark:text-sky-300',
+  'Python': 'bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300',
+  'Django': 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-300',
+  'Vue JS': 'bg-teal-100 text-teal-700 dark:bg-teal-900/50 dark:text-teal-300',
+  'Node.js': 'bg-green-100 text-green-700 dark:bg-green-900/50 dark:text-green-300',
+  'React Native': 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-300',
+  'Firebase': 'bg-amber-100 text-amber-700 dark:bg-amber-900/50 dark:text-amber-300',
+  // Warna default 
+  'Default': 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300'
+};
+
+const TechBadge = ({ name }) => {
+	const colorClass = TECH_COLORS[name] || TECH_COLORS.Default;
+
+	return (
+		<span className={`text-xs font-bold px-3 py-1 rounded-full ${colorClass}`}>
+			{name}
+		</span>
+	);
+};
+
 export default function Portfolio() {
   const [projects, setProjects] = useState([]);
 	const [showAllProjects, setShowAllProjects] = useState(false);
@@ -40,14 +63,15 @@ export default function Portfolio() {
                   <div key={project.id} className='group rounded-2xl overflow-hidden bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-amber-400 dark:hover:border-indigo-500 transition-colors'>
                     <div className='h-64 overflow-hidden relative'>
                       <div className='absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors z-10'></div>
-                      <img src={proj1} alt={project.title} className='w-full h-full object-cover group-hover:scale-105 transition-transform duration-500' />
+                      <img src={project.image_url} alt={project.title} className='w-full h-full object-cover group-hover:scale-105 transition-transform duration-500' />
                     </div>
 
                     <div className='p-8'>
                       {/* techstack */}
                       <div className='flex gap-2 mb-4'>
                         {project.tags.split(',').map((tag, index) => (
-                          <span key={index} className='text-xs font-bold px-3 py-1 bg-amber-100 text-amber-700 dark:bg-indigo-900/50 dark:text-indigo-300 rounded-full'>{tag.trim()}</span>
+                          <TechBadge key={index} name={tag.trim()}/>
+                          // <span key={index} className='text-xs font-bold px-3 py-1 bg-amber-100 text-amber-700 dark:bg-indigo-900/50 dark:text-indigo-300 rounded-full'>{tag.trim()}</span>
                         ))}
                       </div>
 
