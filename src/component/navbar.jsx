@@ -5,10 +5,12 @@ import {
 	Menu,
 	X
 } from 'lucide-react';
+import { a } from 'framer-motion/client';
 
 export default function Navbar({ isDark, setIsDark }) {
 	const [isScrolled, setIsScrolled] = useState(false);
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+	const [activeSection, setActivateSection] = useState('');
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -16,21 +18,62 @@ export default function Navbar({ isDark, setIsDark }) {
 				setIsScrolled(true);
 			} else {
 				setIsScrolled(false);
+				setActivateSection('hero');
 			}
 		};
 
 		window.addEventListener('scroll', handleScroll);
-		return () => window.removeEventListener('scroll', handleScroll);
+
+		// --- cek section aktif ---
+		const sections = ['hero', 'about', 'expertise', 'portfolio', 'contact'];
+    
+		const observerOptions = {
+			root: null,
+			rootMargin: '-40% 0px -40% 0px', // Deteksi saat section berada di tengah layar
+			threshold: 0
+		};
+
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					setActivateSection(entry.target.id);
+				}
+			});
+		}, observerOptions);
+
+		sections.forEach((id) => {
+			const element = document.getElementById(id);
+			if (element) observer.observe(element);
+		});
+
+		return () => {
+			window.removeEventListener('scroll', handleScroll);
+			observer.disconnect();
+		}
 	}, []);
 
 	return (
-		<div className={`fixed top-0 w-full z-50 p-4 pt-6 justify-between items-center flex font-bold text-lg transition-all duration-300 ${isScrolled ? 'bg-white/70 dark:bg-slate-900/70 backdrop-blur-md shadow-sm py-4' : 'bg-transparent'}`}>
-			<div className='ml-4 md:ml-10'><span className='text-4xl'>Kresnanta</span></div>
+		<div className={`fixed top-0 w-full z-50 p-4 pt-6 justify-between items-center flex font-bold text-lg transition-all duration-300 ${isScrolled && !isMobileMenuOpen ? 'bg-white/70 dark:bg-slate-900/70 backdrop-blur-md shadow-sm py-4' : 'py-6 bg-transparent backdrop-blur-none'}`}>
+			<div className='ml-4 md:ml-10'><span className='text-4xl'>Kresnanta</span> <span className='bg-linear-to-r from-red-400 to-amber-400 dark:from-indigo-400 dark:to-cyan-400 bg-clip-text text-transparent'>Portfolio</span></div>
 
+			{/* Navbar Desktop */}
 			<div className='hidden md:flex gap-8 items-center mr-10'>
-				<a href="#about" className='px-5 hover:text-amber-500 dark:hover:text-indigo-400 transition-colors'>About</a>
+				{[
+					{ id: 'about', label: 'About' },
+					{ id: 'expertise', label: 'Expertise' },
+					{ id: 'portfolio', label: 'Project' }
+				].map((item) => (
+					<a key={item.id} 
+					href={`#${item.id}`} 
+					className={`group relative px-2 transition-colors duration-300 ${ activeSection === item.id ? 'text-amber-500 dark:text-indigo-400' : 'text-slate-700 dark:text-slate-200 hover:text-amber-500 dark:hover:text-indigo-400' }`}>
+						{item.label}
+						<span className={`absolute -bottom-1 left-0 h-0.5 bg-amber-500 dark:bg-indigo-400 transition-all duration-300 ease-in-out ${activeSection === item.id ? 'w-full opacity-100' : 'w-0 opacity-0 group-hover:w-full group-hover:opacity-50'}`}>
+						</span>
+					</a>
+				))}
+				{/* <a href="#about" className='px-5 hover:text-amber-500 dark:hover:text-indigo-400 transition-colors'>About</a>
 				<a href="#expertise" className='px-5 hover:text-amber-500 dark:hover:text-indigo-400 transition-colors'>Expertise</a>
-				<a href="#portfolio" className='px-5 hover:text-amber-500 dark:hover:text-indigo-400 transition-colors'>Project</a>
+				<a href="#portfolio" className='px-5 hover:text-amber-500 dark:hover:text-indigo-400 transition-colors'>Project</a> */}
 				<a href="#contact" className='px-5 py-2 border-2 border-amber-500 text-amber-600 dark:text-slate-100 dark:border-indigo-400 rounded-lg hover:bg-amber-50 dark:hover:bg-indigo-900/30 transition-all'>
 					Contact
 				</a>

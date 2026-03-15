@@ -13,6 +13,9 @@ import Contact from './component/contact';
 
 import { Toaster } from 'react-hot-toast';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
+
+const myDomain = '';
 
 const ScrollReveal = ({ children, delay = 0 }) => {
     return (
@@ -52,6 +55,19 @@ function App() {
 
   return (
     <>
+      <Helmet>
+        <title>Agung Kresna | Computer Engineering & Aspiring Cybersecurity</title>
+
+        <meta name="description" content="Portfolio of Agung Kresna, a Computer Engineering student at ITS Surabaya. Specializing in Cybersecurity, AIoT, and Fullstack Web Development." />
+        <meta name="keywords" content="Agung Kresna, Kresnanta, Portfolio, ITS Surabaya, Computer Engineering, Cybersecurity, AIoT" />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Agung Kresna | Engineering & Security" />
+        <meta property="og:description" content="Merging IoT with Machine Learning & Securing Systems. See my latest projects." />
+        <meta property="og:image" content="/meta_preview.png" />
+
+        <meta name="theme-color" content="#4F46E5" />
+      </Helmet>
       
       <div className='min-h-screen bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-50 font-sans transition-colors duration-300'>
         <Toaster 
