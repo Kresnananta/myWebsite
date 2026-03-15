@@ -11,39 +11,23 @@
 
 A modern, responsive portfolio website showcasing web development skills and projects. Built with **React**, **Vite**, and **Tailwind CSS** to demonstrate expertise in full-stack development, UI/UX design, and modern web technologies. This personal portfolio serves as a professional online presence and platform to display completed projects.
 
+![Hero-preview](public/meta_preview.png)
+
 ---
 
+---
 
 ## 📁 Project Structure
 
 ```
 myWebsite/
 ├── src/
-│   ├── component/                  # React components
-│   │   ├── about.jsx
-│   │   ├── contact.jsx
-│   │   ├── expertise.jsx
-│   │   ├── hero.jsx
-│   │   ├── navbar.jsx
-│   │   └── portfolio.jsx
-│   ├── assets/                     # Images, SVGs, and media files
-│   │   ├── react.svg
-│   │   └── me_hero_crop.png
-│   ├── App.jsx                     # Main application component
-│   ├── App.css                     # Component styling
-│   ├── main.jsx                    # React entry point
-│   └── index.css                   # Global styles
-├── public/
-│   └── vite.svg                    # Public assets
-├── index.html                      # HTML entry point
-├── package.json                    # Project dependencies and scripts
-├── vite.config.js                  # Vite configuration
-├── tailwind.config.js              # Tailwind CSS configuration
-├── eslint.config.js                # ESLint rules configuration
-├── Dockerfile                      # Docker container configuration
-├── .dockerignore                   # Docker ignore file
-├── .gitignore                      # Git ignore file
-└── README.md                       # This file
+│   ├── component/                    # React components (navbar, hero, about, etc.)
+│   ├── assets/                       # Images, SVGs, and media files
+│   └── Configuration files           # App.jsx, main.jsx, styling files
+├── public/                           # Static assets
+├── backend/                          # Node.js server and API routes
+└── Configuration & Docker files      # vite.config.js, tailwind.config.js, Dockerfile, etc.
 ```
 
 ---
@@ -69,7 +53,7 @@ Adminer  : `http://localhost:8080` (DB Management)
 
 
 3. **Initial DB Setup**  
-Login ke Adminer dan jalankan query berikut untuk membuat tabel:
+Login to Adminer and run the following query to create the table:
 ```sql
 CREATE TABLE contacts (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -77,11 +61,28 @@ CREATE TABLE contacts (
   subject VARCHAR(200), message TEXT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+CREATE TABLE projects (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  description TEXT,
+  tags VARCHAR(255),
+  image_url TEXT,
+  live_demo VARCHAR(255),
+  source_code VARCHAR(255),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 ```
 
 ---
 
+## ✨ Current Features
 
+- Smooth & modern UI with interactive components
+- Fully responsive design (mobile, tablet, desktop)
+- Dark mode toggle
+- Database for storing projects & contact form responses
+- Telegram notifications for contact form submissions
+- SEO optimized with proper metadata
 
 ---
 
