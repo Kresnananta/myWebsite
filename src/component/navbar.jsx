@@ -25,7 +25,7 @@ export default function Navbar({ isDark, setIsDark }) {
 		window.addEventListener('scroll', handleScroll);
 
 		// --- cek section aktif ---
-		const sections = ['hero', 'about', 'expertise', 'portfolio', 'contact'];
+		const sections = ['hero', 'about', 'expertise', 'portfolio', 'experience', 'contact'];
     
 		const observerOptions = {
 			root: null,
@@ -61,7 +61,8 @@ export default function Navbar({ isDark, setIsDark }) {
 				{[
 					{ id: 'about', label: 'About' },
 					{ id: 'expertise', label: 'Expertise' },
-					{ id: 'portfolio', label: 'Project' }
+					{ id: 'portfolio', label: 'Project' },
+					{ id: 'experience', label: 'Experience' }
 				].map((item) => (
 					<a key={item.id} 
 					href={`#${item.id}`} 
@@ -71,9 +72,6 @@ export default function Navbar({ isDark, setIsDark }) {
 						</span>
 					</a>
 				))}
-				{/* <a href="#about" className='px-5 hover:text-amber-500 dark:hover:text-indigo-400 transition-colors'>About</a>
-				<a href="#expertise" className='px-5 hover:text-amber-500 dark:hover:text-indigo-400 transition-colors'>Expertise</a>
-				<a href="#portfolio" className='px-5 hover:text-amber-500 dark:hover:text-indigo-400 transition-colors'>Project</a> */}
 				<a href="#contact" className='px-5 py-2 border-2 border-amber-500 text-amber-600 dark:text-slate-100 dark:border-indigo-400 rounded-lg hover:bg-amber-50 dark:hover:bg-indigo-900/30 transition-all'>
 					Contact
 				</a>

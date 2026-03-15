@@ -10,6 +10,8 @@ import About from './component/about';
 import Expertise from './component/expertise';
 import Portfolio from './component/portfolio';
 import Contact from './component/contact';
+import Experience from './component/experience';
+import Footer from './component/footer';
 
 import { Toaster } from 'react-hot-toast';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -83,10 +85,9 @@ function App() {
         <ScrollReveal><About /></ScrollReveal>
         <ScrollReveal><Expertise /></ScrollReveal>
         <ScrollReveal><Portfolio /></ScrollReveal>
+        <ScrollReveal><Experience /></ScrollReveal>
         <ScrollReveal><Contact /></ScrollReveal>
-        
-        
-        
+        <Footer/>
         
         
 
