@@ -40,7 +40,7 @@ export default function About() {
 							<p className='text-lg leading-relaxed text-slate-600 dark:text-slate-300'>My job is to build your systems so that they are robust and functional from the core, utilizing my strong foundation in C/C++ and Python. Moreover, I add a modern touch to your products using React and Tailwind CSS to ensure they are scalable and user-friendly. My aim is to bridge the gap between Machine Learning and IoT in the most innovative way, driven by a global mindset and a passion for technical excellence.</p>
 
 							<div className='mt-auto pt-4'>
-								<a href="#" className='inline-flex items-center text-amber-600 dark:text-indigo-400 font-bold hover:underline underline-offset-4'>Let's Work Together <ChevronRight className='ml-1' /></a>
+								<a href="#contact" className='inline-flex items-center text-amber-600 dark:text-indigo-400 font-bold hover:underline underline-offset-4'>Send me a message <ChevronRight className='ml-1' /></a>
 							</div>
 						</div>
 					</div>

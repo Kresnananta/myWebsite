@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { supabase } from '../lib/supabaseClient';
 import {
 	ExternalLink,
 	Github
@@ -33,19 +34,31 @@ const TechBadge = ({ name }) => {
 export default function Portfolio() {
   const [projects, setProjects] = useState([]);
 	const [showAllProjects, setShowAllProjects] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/projects');
-        setProjects(response.data);
+        setLoading(true);
+        const { data, error } = await supabase
+          .from('projects')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        if (error) throw error;
+        setProjects(data || []);
       } catch (error) {
         console.error("Gagal mengambil data project:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchProjects();
   }, []);
+
+  // Loading state
+  if (loading) return <div className="py-20 text-center dark:text-white">Loading Projects...</div>;
 
 	return (
 		<>
@@ -70,9 +83,8 @@ export default function Portfolio() {
                     <div className='p-8'>
                       {/* techstack */}
                       <div className='flex gap-2 mb-4'>
-                        {project.tags.split(',').map((tag, index) => (
+                        {project.tags?.map((tag, index) => (
                           <TechBadge key={index} name={tag.trim()}/>
-                          // <span key={index} className='text-xs font-bold px-3 py-1 bg-amber-100 text-amber-700 dark:bg-indigo-900/50 dark:text-indigo-300 rounded-full'>{tag.trim()}</span>
                         ))}
                       </div>
 

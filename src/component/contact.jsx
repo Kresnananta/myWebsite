@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import { supabase } from '../lib/supabaseClient';
 import {
 	Mail,
 	Smartphone,
@@ -28,25 +29,19 @@ export default function Contact() {
 	const loadingToast = toast.loading('Sending message...')
     
     try {
-      const response = await fetch('http://localhost:5000/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      const { error } = await supabase
+	  	.from('contacts')
+	  	.insert([formData]);
 
-      const result = await response.json();
-
-      if (response.ok) {
-        toast.success('Message sent, thank you', { id: loadingToast });
-        setFormData({ name: '', email: '', subject: '', message: '' });
-      }
-      else {
+      if (error) {
         toast.error('Failed send message', { id:loadingToast });
       }
+      else {
+		toast.success('Message sent, thank you', { id: loadingToast });
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      }
     } catch (error) {
-      toast.error('Server sedang offline!', { id: loadingToast });
+      toast.error('Connection Failed!', { id: loadingToast });
     }
   };
 
@@ -115,7 +110,7 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     type="email" placeholder='johnchena@example.com' className='w-full px-4 py-3 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-amber-400 dark:focus:ring-indigo-500 transition-shadow text-slate-500 dark:text-slate-200 invalid:focus:ring-red-400 peer' />
-									<p className='text-sm text-right md:text-left -mb-8 text-red-400 invisible peer-invalid:visible'>email is not valid</p>
+									<p className='text-sm text-right md:text-left -mb-8 text-red-400 invisible peer-[:not(:placeholder-shown):invalid]:visible'>email is not valid</p>
 								</div>
 							</div>
 							<div className='space-y-2'>
