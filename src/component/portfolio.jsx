@@ -17,6 +17,10 @@ const TECH_COLORS = {
   'React Native': 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-300',
   'Firebase': 'bg-amber-100 text-amber-700 dark:bg-amber-900/50 dark:text-amber-300',
   'Docker': 'bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300',
+  'Vite': 'bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300',
+  'Supabase': 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-300',
+  'JavaScript': 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/50 dark:text-yellow-300',
+  'TypeScript': 'bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300',
   // Warna default 
   'Default': 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300'
 };
@@ -30,6 +34,23 @@ const TechBadge = ({ name }) => {
 		</span>
 	);
 };
+
+const SkeletonCard = () => (
+  <div className="rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 animate-pulse">
+    <div className="h-64 bg-slate-200 dark:bg-slate-700"></div> {/* Area Gambar */}
+    <div className="p-8">
+      <div className="flex gap-2 mb-4">
+        <div className="h-5 w-16 bg-slate-200 dark:bg-slate-700 rounded-full"></div> {/* Tag 1 */}
+        <div className="h-5 w-16 bg-slate-200 dark:bg-slate-700 rounded-full"></div> {/* Tag 2 */}
+      </div>
+      <div className="h-7 w-3/4 bg-slate-200 dark:bg-slate-700 rounded mb-3"></div> {/* Judul */}
+      <div className="space-y-2">
+        <div className="h-4 w-full bg-slate-200 dark:bg-slate-700 rounded"></div> {/* Deskripsi baris 1 */}
+        <div className="h-4 w-5/6 bg-slate-200 dark:bg-slate-700 rounded"></div> {/* Deskripsi baris 2 */}
+      </div>
+    </div>
+  </div>
+);
 
 export default function Portfolio() {
   const [projects, setProjects] = useState([]);
@@ -57,9 +78,6 @@ export default function Portfolio() {
     fetchProjects();
   }, []);
 
-  // Loading state
-  if (loading) return <div className="py-20 text-center dark:text-white">Loading Projects...</div>;
-
 	return (
 		<>
 			{/* Porfolio */}
@@ -71,9 +89,15 @@ export default function Portfolio() {
 					<div className='relative'>
 						<div className={`transition-all duration-500 ease-in-out overflow-hidden ${showAllProjects ? 'max-h-[4000px]' : 'max-h-[1300px] md:max-h-[800px]'}`}>
 							<div className='grid grid-cols-1 md:grid-cols-2 gap-10'>
-
-								{/* 1 */}
-                {projects.map((project) => (
+              {loading ? (
+                <>
+                  <SkeletonCard/>
+                  <SkeletonCard/>
+                  <SkeletonCard/>
+                  <SkeletonCard/>
+                </>
+              ) : (
+                projects.map((project) => (
                   <div key={project.id} className='group rounded-2xl overflow-hidden bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-amber-400 dark:hover:border-indigo-500 transition-colors'>
                     <div className='h-64 overflow-hidden relative'>
                       <div className='absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors z-10'></div>
@@ -99,7 +123,8 @@ export default function Portfolio() {
                       </div>
                     </div>
                   </div>
-                ))}
+                ))
+              )};
 
 							</div>
 						</div>

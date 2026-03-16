@@ -5,7 +5,6 @@ import {
 	Menu,
 	X
 } from 'lucide-react';
-import { a } from 'framer-motion/client';
 
 export default function Navbar({ isDark, setIsDark }) {
 	const [isScrolled, setIsScrolled] = useState(false);
@@ -29,12 +28,15 @@ export default function Navbar({ isDark, setIsDark }) {
     
 		const observerOptions = {
 			root: null,
-			rootMargin: '-40% 0px -40% 0px', // Deteksi saat section berada di tengah layar
+			rootMargin: '-30% 0px -30% 0px', // Deteksi saat section berada di tengah layar
 			threshold: 0
 		};
 
 		const observer = new IntersectionObserver((entries) => {
 			entries.forEach((entry) => {
+				// Log ini akan muncul di Inspect Element > Console
+        		console.log(`Checking ${entry.target.id}: isIntersecting = ${entry.isIntersecting}`);
+				
 				if (entry.isIntersecting) {
 					setActivateSection(entry.target.id);
 				}
