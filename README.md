@@ -3,9 +3,8 @@
 ![React](https://img.shields.io/badge/React-19.2.0-61DAFB?style=flat-square&logo=react)
 ![Vite](https://img.shields.io/badge/Vite-7.3.1-646CFF?style=flat-square&logo=vite)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.1.18-06B6D4?style=flat-square&logo=tailwindcss)
-![ESLint](https://img.shields.io/badge/ESLint-9.39.1-4B32C3?style=flat-square&logo=eslint)
-![Docker](https://img.shields.io/badge/Docker-Yes-2496ED?style=flat-square&logo=docker)
-![Status](https://img.shields.io/badge/Status-In_Development-yellow?style=flat-square)
+![Supabase](https://img.shields.io/badge/Supabase-Backend-3ECF8E?style=flat-square&logo=supabase)
+![Status](https://img.shields.io/badge/Status-Live-green?style=flat-square)
 
 ## 📝 Short Description
 
@@ -21,13 +20,14 @@ A modern, responsive portfolio website showcasing web development skills and pro
 
 ```
 myWebsite/
-├── src/
-│   ├── component/                    # React components (navbar, hero, about, etc.)
-│   ├── assets/                       # Images, SVGs, and media files
-│   └── Configuration files           # App.jsx, main.jsx, styling files
-├── public/                           # Static assets
-├── backend/                          # Node.js server and API routes
-└── Configuration & Docker files      # vite.config.js, tailwind.config.js, Dockerfile, etc.
+├── src/                              # Source code aplikasi React
+│   ├── component/                    # Komponen React reusable (navbar, hero, about, portfolio, dll)
+│   ├── assets/                       # Media files (gambar, SVG, dan aset visual lainnya)
+│   ├── lib/                          # Utilities dan library configurations (Supabase client)
+│   └── App.jsx, main.jsx, *.css      # Entry point dan styling global
+├── public/                           # Aset statis yang dilayani langsung ke browser
+├── supabase/                         # Supabase configuration dan edge functions
+└── Root configs                      # Vite, Tailwind, ESLint, Docker, dan package configs
 ```
 
 ---
@@ -40,20 +40,32 @@ myWebsite/
 - **Git** - [Download here](https://git-scm.com/)
 - **Docker** (optional) - [Download here](https://www.docker.com/)
 
-### Docker Compose (Steps)
-1. **Start Services**  
-  ``` bash
-  $ docker-compose up -d --build
-  ```
+### Local Setup (Steps)
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/Kresnananta/myWebsite.git
+   cd myWebsite
+   ```
 
-2. **Access Services**  
-Frontend : `http://localhost:5173`  
-Backend  : `http://localhost:5000`  
-Adminer  : `http://localhost:8080` (DB Management)
+2. **Install Dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Configure Environment Variables**<br>
+  Create a `.env` file in the root directory:
+   ```
+   VITE_SUPABASE_URL=your_supabase_project_url
+   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
+4. **Run Development Server**<br>
+   ```bash
+   npm run dev
+   ```
 
 
-3. **Initial DB Setup**  
-Login to Adminer and run the following query to create the table:
+### Initial DB Setup  
+Login to Supabase and run the following query to create the table:
 ```sql
 CREATE TABLE contacts (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -88,15 +100,28 @@ CREATE TABLE projects (
 
 ## 📜 Available Scripts
 
+### Frontend Scripts (Vite)
 | Command | Description |
 |---------|------------|
-| `npm run dev` | Start development server with HMR (Hot Module Replacement) |
+| `npm run dev` | Start development server with HMR |
 | `npm run build` | Build optimized production bundle in `dist/` |
 | `npm run preview` | Preview the production build locally |
-| `npm run lint` | Run ESLint to check code quality |
+
+### Supabase Edge Functions
+| Command | Description |
+|---------|------------|
+| `npx supabase functions serve` | Test Edge Functions locally |
+| `npx supabase functions deploy telegram-notify` | Deploy function to Supabase Cloud |
+| `npx supabase secrets list` | List all secrets stored in Cloud |
+| `npx supabase secrets set KEY=VALUE` | Set sensitive env vars (e.g. Telegram Token) |
+
+### Docker & Backend
+| Command | Description |
+|---------|------------|
 | `docker-compose restart backend` | Restart node.js server after changes |
 | `docker logs -f web_porto_backend` | Monitor backend logs |
 | `docker logs -f web_porto_frontend` | Monitor frontend logs |
+"""
 
 ---
 
@@ -112,5 +137,6 @@ For inquiries or collaboration opportunities, feel free to reach out through the
 
 ---
 
-**Last Updated**: February 2026  
-**Version**: 0.0.0 (Development)
+**Last Updated**: March 2026  
+**Status**: Production
+**Version**: 1.0.0 (Stable Release)
