@@ -36,7 +36,7 @@ export default function About() {
 								Get to know me
 							</div>
 							<h2 className='text-4xl font-bold'>About Me</h2>
-							<p className='text-lg leading-relaxed text-slate-600 dark:text-slate-300'>I'm a Computer Engineering student from ITS, specializing in software development and logical problem solving. I enjoy turning complex technical challenges into efficient, high-performance, and secure digital solutions.</p>
+							<p className='text-lg leading-relaxed text-slate-600 dark:text-slate-300'>I'm Anak Agung Ngurah Agung Kresna Ananta, a Computer Engineering student from ITS, specializing in software development and logical problem solving. I enjoy turning complex technical challenges into efficient, high-performance, and secure digital solutions.</p>
 							<p className='text-lg leading-relaxed text-slate-600 dark:text-slate-300'>My job is to build your systems so that they are robust and functional from the core, utilizing my strong foundation in C/C++ and Python. Moreover, I add a modern touch to your products using React and Tailwind CSS to ensure they are scalable and user-friendly. My aim is to bridge the gap between Machine Learning and IoT in the most innovative way, driven by a global mindset and a passion for technical excellence.</p>
 
 							<div className='mt-auto pt-4'>

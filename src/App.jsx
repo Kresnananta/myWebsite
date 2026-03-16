@@ -58,7 +58,7 @@ function App() {
   return (
     <>
       <Helmet>
-        <title>Agung Kresna | Computer Engineering & Aspiring Cybersecurity</title>
+        <title>Kresna Ananta | Computer Engineering & Aspiring Cybersecurity</title>
 
         <meta name="description" content="Portfolio of Agung Kresna, a Computer Engineering student at ITS Surabaya. Specializing in Cybersecurity, AIoT, and Fullstack Web Development." />
         <meta name="keywords" content="Agung Kresna, Kresnanta, Portfolio, ITS Surabaya, Computer Engineering, Cybersecurity, AIoT" />
@@ -66,7 +66,7 @@ function App() {
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Agung Kresna | Engineering & Security" />
         <meta property="og:description" content="Merging IoT with Machine Learning & Securing Systems. See my latest projects." />
-        <meta property="og:image" content="/meta_preview.png" />
+        <meta property="og:image" content="https://kresna-portfolio-seven.vercel.app/meta_preview.png" />
 
         <meta name="theme-color" content="#4F46E5" />
       </Helmet>

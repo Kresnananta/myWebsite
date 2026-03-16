@@ -9,7 +9,7 @@ const EXPERIENCES = [
     id: 1,
     title: "Secretary of Internal Department",
     company: "TPKH ITS",
-    date: "Feb 2026 — Present",
+    date: "Feb 2025 — Jan 2026",
     description: "Manage internal administration and coordination between department members to ensure the efficiency of the student organization.",
     location: "Surabaya, Indonesia"
   },
