@@ -21,6 +21,10 @@ const TECH_COLORS = {
   'Supabase': 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-300',
   'JavaScript': 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/50 dark:text-yellow-300',
   'TypeScript': 'bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300',
+  'C': 'bg-indigo-200 text-indigo-700 dark:bg-indigo-800/50 dark:text-indigo-300',
+  'C++': 'bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-200',
+  'C#': 'bg-violet-100 text-violet-700 dark:bg-violet-900/50 dark:text-violet-300',
+  '.NET': 'bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300',
   // Warna default 
   'Default': 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300'
 };

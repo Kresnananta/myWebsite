@@ -22,7 +22,7 @@ export default function Hero() {
 						<a href="#portfolio" className='bg-orange-400 hover:bg-orange-500 dark:bg-indigo-600 dark:hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all hover:-translate-y-1'>
 							Explore Projects
 						</a>
-						<a href="#" className='group font-bold flex items-center text-slate-700 dark:text-slate-200 hover:text-amber-500 hover:dark:text-indigo-400 transition-colors'>
+						<a href="/resume-kresna.pdf" target='_blank' rel='noopener noreferrer' className='group font-bold flex items-center text-slate-700 dark:text-slate-200 hover:text-amber-500 hover:dark:text-indigo-400 transition-colors'>
 							See my resume
 							<ArrowUpRight className="ml-2 w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform stroke-[2.5px]" />
 						</a>

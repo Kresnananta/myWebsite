@@ -34,9 +34,6 @@ export default function Navbar({ isDark, setIsDark }) {
 
 		const observer = new IntersectionObserver((entries) => {
 			entries.forEach((entry) => {
-				// Log ini akan muncul di Inspect Element > Console
-        		console.log(`Checking ${entry.target.id}: isIntersecting = ${entry.isIntersecting}`);
-				
 				if (entry.isIntersecting) {
 					setActivateSection(entry.target.id);
 				}
